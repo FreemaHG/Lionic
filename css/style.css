@@ -70,13 +70,15 @@ list-style: none;
 .btn {
     position: relative;
     outline: none;
+    border-radius: 3px;
+    padding: 15px 35px;
     font-weight: 600;
     font-size: 15px;
     text-transform: uppercase;
-    padding: 15px 35px;
-    background-color: #3172B9;
-    border-radius: 3px;
     color: #fff;
+    background-color: #3172B9;
+    transition: background-color 0.3s ease-in-out;  /* Фон кнопки плавно будет меняться в состоянии hover */
+
 }
 
 .btn::after {
@@ -91,6 +93,7 @@ list-style: none;
     border: 1px solid #3172B9;
     outline: none;
     opacity: 0;
+    transition: opacity 0.3s ease-in-out;  /* Обводка кнопки плавно будет меняться в состоянии hover */
 }
 
 .btn:focus::after {
@@ -175,6 +178,8 @@ list-style: none;
     font-weight: 600;
     color: #1C1C1C;
     font-size: 15px;
+    /* Свойства, изменяемые в разных состояниях (анимация) */
+    transition: color .3s ease-in-out;  /* Изменяемое свойство, время анимации и график изменения свойст (плавность, линейность) */
 }
 
 /* ВАЖНО: порядок - focus -> hover -> active */
@@ -196,6 +201,7 @@ list-style: none;
     height: 2px;
     background-color: #3172B9;
     opacity: 0;  /* Делаем прозрачным в обычном состоянии */
+    transition: opacity 0.3s ease-in-out;  /* Указываем анимированно изменяемое свойство */
 }
 
 .header-link:active {  /* Св-ва при клике */
@@ -292,6 +298,8 @@ list-style: none;
     padding: 60px 30px;
     border: 1px solid #E4E4E4;
     border-radius: 5px;
+    /* Плавная смена цвета в состоянии hover */
+    transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
 }
 
 .services-item:hover {  /* Меняем цвет карточки при наведении */
@@ -304,13 +312,10 @@ list-style: none;
     margin-right: 30px;
 }
 
-.srvices-item-icon {
-    margin-bottom: 25px;
-}
-
 .services-item-icon {
     fill: #3172B9;
     margin-bottom: 27px;
+    transition: fill .3s ease-in-out;
 }
 
 /* При наведенеии на карточку (в состоянии hover) у вложенной SVG-картинки будет меняться цвет */
@@ -327,6 +332,7 @@ list-style: none;
     line-height: 130%;
     text-align: center;
     color: #1C1C1C;
+    transition: color .3s ease-in-out;  /* Плавно меняем цвет текста в состоянии hover */
 }
 
 /* При наведенеии на карточку (в состоянии hover) у вложенного стиля с заголовком будет меняться цвет */
@@ -342,6 +348,7 @@ list-style: none;
     line-height: 150%;
     text-align: center;
     color: #787878;
+    transition: color .3s ease-in-out;  /* Плавно меняем цвет текста в состоянии hover */
 }
 
 /* При наведенеии на карточку (в состоянии hover) у вложенного стиля с описанием будет меняться цвет */
@@ -372,6 +379,7 @@ list-style: none;
 .blog-preview-link {
     position: relative;
     width: 100%;
+    transition: background-color .3s ease-in-out;  /* Плавно меняем цвет фона в других состояниях */
 }
 
 /* ВАЖНО: порядок - focus -> hover -> active */
@@ -432,6 +440,7 @@ list-style: none;
     font-size: 10px;
     line-height: 150%;
     color: #787878;
+    transition: color .3s ease-in-out;  /* Плавно меняем цвет текста в состоянии hover */
 }
 
 .blog-preview-title {
@@ -441,6 +450,7 @@ list-style: none;
     font-size: 20px;
     line-height: 130%;
     color: #1C1C1C;
+    transition: color .3s ease-in-out;  /* Плавно меняем цвет текста в состоянии hover */
 }
 
 .blog-preview-desc {
@@ -449,6 +459,7 @@ list-style: none;
     font-size: 14px;
     line-height: 150%;
     color: #787878;
+    transition: color .3s ease-in-out;  /* Плавно меняем цвет текста в состоянии hover */
 }
 
 /* clients */
@@ -567,6 +578,7 @@ list-style: none;
     font-size: 14px;
     line-height: 180%;
     color: #787878;
+    transition: color .3s ease-in-out;  /* Плавно меняем цвет ссылок в состоянии hover */
 }
 
 /* ВАЖНО: порядок - focus -> hover -> active */
@@ -626,6 +638,8 @@ list-style: none;
     border: 1px solid #DADADA;
     border-radius: 50px;
     margin-bottom: 19px;
+    /* Плавная смена фона и обводки в состоянии hover и active */
+    transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
 }
 
 /* ВАЖНО: порядок - focus -> hover -> active */
@@ -650,6 +664,8 @@ list-style: none;
     padding: 15px 28px;
     border: 1px solid #DADADA;
     border-radius: 50px;
+    /* Плавная смена фона и обводки в состоянии hover и active */
+    transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
 }
 
 .form-select:focus {
@@ -674,6 +690,8 @@ list-style: none;
     padding: 15px 28px;
     border: 1px solid #DADADA;
     border-radius: 20px;
+    /* Плавная смена фона и обводки в состоянии hover и active */
+    transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
 }
 
 .form-textarea:focus {
@@ -772,6 +790,7 @@ list-style: none;
     font-size: 15px;
     line-height: 20px;
     color: #787878;
+    transition: color .3s ease-in-out;
 }
 
 /* ВАЖНО: порядок - focus -> hover -> active */
@@ -793,6 +812,7 @@ list-style: none;
     height: 2px;
     background-color: #3172B9;
     opacity: 0;  /* Делаем прозрачным в обычном состоянии */
+    transition: opacity .3s ease-in-out;
 }
 
 .footer-link:active {  /* Св-ва при клике */
@@ -823,6 +843,7 @@ list-style: none;
 
 .social-link svg {
     fill: #000;
+    transition: fill .3s ease-in-out, stroke .3s ease-in-out;  /* Плавное изменение цвета при hover и active */
 }
 
 /* SVG-картинка для email имела в HTML-верстке прозрачную заливку и черную обводку */

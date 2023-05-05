@@ -1,0 +1,863 @@
+html {
+    box-sizing: border-box;  /* Сохранение внешних размеров */
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;  /* Наследовать дочерними элементами */
+  }
+  
+  a {
+    color: inherit;  /* Наследовать дочерними элементами */
+    text-decoration: none;  /* Отключить декорацию */
+  }
+  
+  img {
+    max-width: 100%;  /* Занимать всю ширину */
+  }
+  
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans-Regular'),
+    url('../fonts/OpenSansRegular.woff2') format('woff2'),
+    url('../fonts/OpenSansRegular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans-Light'),
+    url('../fonts/OpenSansLight.woff2') format('woff2'),
+    url('../fonts/OpenSansLight.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: local('OpenSans-SemiBold'),
+    url('../fonts/OpenSansSemiBold.woff2') format('woff2'),
+    url('../fonts/OpenSansSemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    min-width: 1200px;
+    font-family: 'OpenSans', sans-serif;  /* По умолчанию */
+    font-weight: 400;
+}
+  
+/* glob */
+.list-reset {  /* Сбрасываем визуальные стили для списков */
+margin: 0;
+padding: 0;
+list-style: none;
+}
+
+.btn-reset {  /* Сбрасываем визуальные стили для кнопок */
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn {
+    position: relative;
+    outline: none;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 15px 35px;
+    background-color: #3172B9;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    /* Растянем псевдоэлемент почти на весь родительский элемент (на 3px меньше с каждой стороны) */
+    top: -3px;
+    bottom: -3px;
+    left: -3px;
+    right: -3px;
+    border-radius: inherit;  /* Закругление раследуется от кнопки */
+    border: 1px solid #3172B9;
+    outline: none;
+    opacity: 0;
+}
+
+.btn:focus::after {
+    opacity: 1;
+}
+
+.btn:hover {  /* Меняем цвет кнопки при наведении */
+    background-color: #71A7E2;
+}
+
+.btn:active {  /* Меняем цвет кнопки при нажатии */
+    background-color: #0E3B6C;
+}
+
+.btn:active::after {  /* Отключаем обводку псевдоэлементом при клике */
+    opacity: 0;
+}
+
+.flex {  /* Общий стиль для flex-контейнеров */
+    display: flex;
+}
+
+.container {  /* Общие свойства для контейнера */
+    width: 1200px;  /* Ширина контейнера */
+    padding: 0 15px;  /* Боковые отступы по 15px */
+    margin: 0 auto;  /* Центрирование по горизонтали */
+}
+
+.section-title {  /* Общие свойства для всех заголовков */
+    margin: 0;  /* Сбрасываем отступы */
+    margin-bottom: 40px;  /* Нижний отступ */
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 130%;
+    color: #1C1C1C;
+}
+
+.section-desc {  /* Общие свойства для всех описаний */
+    margin: 0;
+    margin-bottom: 50px;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #787878;
+}
+
+.section-offset {  /* Общие одинаковые отступы для всех секций */
+    padding-top: 87px;
+    padding-bottom: 160px;
+}
+
+/* header */
+.header {
+    padding: 36px 0;
+    border-bottom: 1px solid #DADADA;
+    background-color: #fff;
+}
+
+.header-container {
+    align-items: center;
+}
+
+.header-logo {
+    margin-right: auto;
+}
+
+.header-logo:focus {
+    outline-offset: 2px;
+    outline: 1px solid #71A7E2;
+}
+
+.header-nav {
+    margin-right: 52px;
+}
+
+.header-list-item:not(:last-child) {
+    margin-right: 52px;
+}
+
+.header-link {
+    position: relative;
+    font-weight: 600;
+    color: #1C1C1C;
+    font-size: 15px;
+}
+
+/* ВАЖНО: порядок - focus -> hover -> active */
+.header-link:focus {  /* Добавляем обводку при фокусе (TAB) */
+    outline-offset: 2px;
+    outline: 1px solid #71A7E2;
+}
+
+.header-link:hover {  /* Меняем цвет ссылок при наведении */
+    color: #71A7E2;
+}
+
+.header-link::after {  /* Нижнее подчеркивание (для active) */
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #3172B9;
+    opacity: 0;  /* Делаем прозрачным в обычном состоянии */
+}
+
+.header-link:active {  /* Св-ва при клике */
+    color: #3172B9;
+    outline: none;  /* Убираем обводку при клике */
+}
+
+.header-link:active::after {
+    color: #3172B9;
+    opacity: 1;  /* Делаем нижнее подчеркивание непрозрачным при клике */
+}
+
+/* hero */
+.hero {
+    padding: 100px 0;
+    padding-top: 100px;
+    padding-bottom: 150px;
+    background-image: url('../img/header-img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 50%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-title {
+    max-width: 529px;
+    margin: 0;
+    margin-bottom: 25px;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 130%;
+}
+
+.hero-desc {
+    margin: 0;
+    margin-bottom: 34px;
+    width: 471px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 155%;
+    color: #787878;
+}
+
+.hero-wrapper {
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-btn {
+    min-width: 250px;
+    margin-bottom: 14px;
+    padding: 19px 58px;
+}
+
+.hero-secure {
+    padding-left: 27px;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 155%;
+    text-transform: uppercase;
+    color: #787878;
+    background-image: url('../img/hero-ssl.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 14px 17px;
+}
+
+/* services */
+.services {
+    border-bottom: 1px solid #DADADA;
+}
+
+.services-title {
+    text-align: center;
+    margin-bottom: 21px;
+}
+
+.services-desc {
+    text-align: center;
+    min-width: 589px;
+    margin-bottom: 54px;
+}
+
+.services-item {
+    flex-direction: column;
+    align-items: center;
+    max-width: 270px;
+    min-height: 320px;
+    padding: 60px 30px;
+    border: 1px solid #E4E4E4;
+    border-radius: 5px;
+}
+
+.services-item:hover {  /* Меняем цвет карточки при наведении */
+    border-color: #3172B9;
+    background-color: #3172B9;
+    cursor: pointer;  /* Меняем курсор при наведении */
+}
+
+.services-item:not(:nth-child(4n)) {
+    margin-right: 30px;
+}
+
+.srvices-item-icon {
+    margin-bottom: 25px;
+}
+
+.services-item-icon {
+    fill: #3172B9;
+    margin-bottom: 27px;
+}
+
+/* При наведенеии на карточку (в состоянии hover) у вложенной SVG-картинки будет меняться цвет */
+.services-item:hover .services-item-icon {  /* Меняем цвет SVG-картинки при наведении, обратившись через вложенный селектор */
+    fill: #fff;
+}
+
+.services-item-title {
+    margin: 0;
+    max-width: 210px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    text-align: center;
+    color: #1C1C1C;
+}
+
+/* При наведенеии на карточку (в состоянии hover) у вложенного стиля с заголовком будет меняться цвет */
+.services-item:hover .services-item-title {  /* Меняем цвет заголовка при наведении, обратившись через вложенный селектор */
+    color: #fff;
+}
+
+.services-item-desc {
+    margin: 0;
+    max-width: 210px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: #787878;
+}
+
+/* При наведенеии на карточку (в состоянии hover) у вложенного стиля с описанием будет меняться цвет */
+.services-item:hover .services-item-desc {  /* Меняем цвет описания при наведении, обратившись через вложенный селектор */
+    color: #fff;
+}
+
+/* articles */
+.articles {
+    border-bottom: 1px solid #DADADA;
+}
+
+.articles-list {
+    flex-wrap: wrap;
+}
+
+.articles-item {
+    width: 570px;
+    margin-bottom: 30px;
+}
+
+.blog-preview {
+    overflow: hidden;
+    border: 1px solid #E4E4E4;
+    border-radius: 5px;
+}
+
+.blog-preview-link {
+    position: relative;
+    width: 100%;
+}
+
+/* ВАЖНО: порядок - focus -> hover -> active */
+.blog-preview-link:focus {  /* Меняем свойства при фокусе на карточке (по нажатию TAB) */
+    background-color: #71A7E2;
+}
+
+/* В фокусе делаем весь текст белым */
+.blog-preview-link:focus .blog-preview-time {
+    color: #fff;
+}
+
+.blog-preview-link:focus .blog-preview-title {
+    color: #fff;
+}
+
+.blog-preview-link:focus .blog-preview-desc {
+    color: #fff;
+}
+
+.blog-preview-link:hover {  /* Меняем свойства при наведении на карточку */
+    background-color: #3172B9;
+}
+
+/* При наведении делаем весь текст белым */
+.blog-preview-link:hover .blog-preview-time {
+    color: #fff;
+}
+
+.blog-preview-link:hover .blog-preview-title {
+    color: #fff;
+}
+
+.blog-preview-link:hover .blog-preview-desc {
+    color: #fff;
+}
+
+/* Цвет текста остается белым, т.к. одновременно работает состояние focus */
+.blog-preview-link:active {  /* Меняем свойства при клике по карточке */
+    background-color: #0E3B6C;
+}
+
+.articles-item:not(:nth-child(2n)) {
+    margin-right: 30px;
+}
+
+.block-preview-image {
+    object-fit: cover;
+}
+
+.blog-preview-text {
+    padding: 30px;
+}
+
+.blog-preview-time {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 10px;
+    line-height: 150%;
+    color: #787878;
+}
+
+.blog-preview-title {
+    margin: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    color: #1C1C1C;
+}
+
+.blog-preview-desc {
+    margin: 0;
+    max-width: 210px;
+    font-size: 14px;
+    line-height: 150%;
+    color: #787878;
+}
+
+/* clients */
+.clients {
+    border-bottom: 1px solid #DADADA;
+}
+
+.clients-list {
+    gap: 30px;
+}
+.clients-item {
+    flex-direction: column;
+    width: 370px;
+    padding: 50px 36px;
+    padding-bottom: 30px;
+    border: 1px solid #6B6B6B;
+    border-radius: 5px;
+}
+
+.clients-item-desc {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 180%;
+    color: #787878;
+}
+
+.clients-user {
+    margin-top: auto;
+    align-items: center;
+    border-top: 1px solid #dadada;
+    width: 100%;
+    padding-top: 28px;
+}
+
+.clients-avatar {
+    flex-shrink: 0;
+    width: 67px;
+    margin-right: 17px;
+}
+
+.clients-avatar img {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #3172B9;
+    border-radius: 100%;
+}
+
+.clients-name {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 180%;
+    color: #1C1C1C;
+}
+
+.clients-post {
+    font-size: 14px;
+    line-height: 180%;
+    color: #787878;
+}
+
+/* contacts */
+.contacts {
+    border-bottom: 1px solid #DADADA;
+}
+
+.contacts-address {
+    font-style: normal;  /* Сбрасываем наклонный фрифт для текста тега address */
+}
+
+.contacts-item {
+    flex-direction: column;
+    width: 370px;
+    background-position: left top;  /* Выравнивание фоновой иконки слева сверху */
+    background-repeat: no-repeat;  /* Не повторять картинку */
+    background-size: 29px 29px;  /* Размеры изображения */
+    padding-top: 48px;  /* Верхний отступ, чтобы иконка не налазила сверху */
+}
+
+.contacts-item-address {
+    background-image: url('../img/location_on.svg');
+}
+
+.contacts-item-call {
+    background-image: url('../img/phone.svg');
+}
+
+.contacts-item-mail {
+    background-image: url('../img/mail.svg');
+}
+
+.contacts-item:not(:nth-child(3n)) {
+    margin-right: 30px;
+}
+
+.contacts-item-caption {
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 180%;
+    color: #1C1C1C;
+}
+
+.contacts-item-text {
+    max-width: 215px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 180%;
+    color: #787878;
+}
+
+.contacts-item-link {
+    display: inline-block;
+    margin-right: auto;
+    font-size: 14px;
+    line-height: 180%;
+    color: #787878;
+}
+
+/* ВАЖНО: порядок - focus -> hover -> active */
+/* Смена стилей для ссылок при разных состояниях */
+.contacts-item-link:focus {
+    outline: 1px solid #71A7E2;  /* При фокусе (TAB) */
+}
+
+.contacts-item-link:hover {
+    color: #71A7E2;  /* При наведении */
+}
+
+.contacts-item-link:active {  /* При клике */
+    color: #0E3B6C;
+    outline: none;  /* Убираем обводку */
+}
+
+/* join us */
+.join-us {
+    border-bottom: 1px solid #DADADA;
+}
+
+.join-us-title {
+    text-align: center;
+}
+
+.join-us-desc {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form {
+    padding: 0 55px;
+}
+
+.form-top {
+    justify-content: space-between;
+    margin-bottom: 19px;
+    height: 138px;
+}
+
+.form-left, .form-right {
+    width: 48%;
+}
+
+.form-left {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.form-input {
+    width: 250px;
+    height: 60px;
+    box-sizing: border-box;
+    padding: 15px 28px;
+    border: 1px solid #DADADA;
+    border-radius: 50px;
+    margin-bottom: 19px;
+}
+
+/* ВАЖНО: порядок - focus -> hover -> active */
+.form-input:focus {
+    outline: none;
+    border-color: #71A7E2;
+    background-color: rgba(113, 167, 226, 0.2);
+}
+
+.form-input:hover {
+    border-color: #71A7E2;
+}
+
+.form-input:active {
+    border-color: #0E3B6C;
+}
+
+.form-select {
+    width: 251px;
+    height: 60px;
+    box-sizing: border-box;
+    padding: 15px 28px;
+    border: 1px solid #DADADA;
+    border-radius: 50px;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #71A7E2;
+    background-color: rgba(113, 167, 226, 0.2);
+}
+
+.form-select:hover {
+    border-color: #71A7E2;
+}
+
+.form-select:active {
+    border-color: #0E3B6C;
+}
+
+.form-textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    box-sizing: border-box;
+    padding: 15px 28px;
+    border: 1px solid #DADADA;
+    border-radius: 20px;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #71A7E2;
+    background-color: rgba(113, 167, 226, 0.2);
+}
+
+.form-textarea:hover {
+    border-color: #71A7E2;
+}
+
+.form-textarea:active {
+    border-color: #0E3B6C;
+}
+
+.btn-join-us {
+    min-width: 230px;
+    height: 60px;
+    padding: 20px 67px;
+    margin-bottom: 9px;
+    border-radius: 50px;
+}
+
+.form-bottom {
+    justify-content: flex-end;
+}
+
+.form-wrapper {
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-check {
+    font-size: 12px;
+    line-height: 16px;
+    color: #787878;
+}
+
+.form-check input {
+    margin-right: 8px;
+}
+
+.form-check a {
+    color: #3172B9;
+    border-bottom: 1px solid #3172B9;
+}
+
+.form-check a:focus,
+.form-check input:focus {
+    outline-offset: 2px;
+    outline: 1px solid #3172B9;
+}
+
+/* footer */
+.footer {
+    padding: 42px 0;
+}
+
+.footer-container {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-left, 
+.footer-right {
+    align-items: center;
+}
+
+.footer-logo {
+    margin-right: 25px;
+}
+
+.footer-logo:focus {
+    outline-offset: 2px;
+    outline: 1px solid #71A7E2;
+}
+
+.footer-copy {
+    font-size: 12px;
+    line-height: 16px;
+    color: #787878;
+}
+
+.footer-nav {
+    margin-right: 56px;
+}
+
+.footer-item:not(:last-child) {
+    margin-right: 28px;
+}
+
+.footer-link {
+    position: relative;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    color: #787878;
+}
+
+/* ВАЖНО: порядок - focus -> hover -> active */
+.footer-link:focus {  /* Добавляем обводку при фокусе (TAB) */
+    outline-offset: 2px;
+    outline: 1px solid #71A7E2;
+}
+
+.footer-link:hover {  /* Меняем цвет ссылок при наведении */
+    color: #71A7E2;
+}
+
+.footer-link::after {  /* Нижнее подчеркивание (для active) */
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #3172B9;
+    opacity: 0;  /* Делаем прозрачным в обычном состоянии */
+}
+
+.footer-link:active {  /* Св-ва при клике */
+    color: #3172B9;
+    outline: none;  /* Убираем обводку при клике */
+}
+
+.footer-link:active::after {
+    color: #3172B9;
+    opacity: 1;  /* Делаем нижнее подчеркивание непрозрачным при клике */
+}
+
+.social {
+    align-items: center;
+}
+
+.social-item:not(:last-child) {
+    margin-right: 32px;
+}
+
+.social-link {
+    /* Задаем размеры немного больше для большего удобства при нажатии */
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-link svg {
+    fill: #000;
+}
+
+/* SVG-картинка для email имела в HTML-верстке прозрачную заливку и черную обводку */
+.social-link-mail svg {
+    fill: transparent;  /* Прозрачная заливка */
+    stroke: #000;  /* Черная обводка */
+}
+
+.social-link:focus {
+    outline-offset: 2px;  /* Отступление обводки */
+    outline: 1px solid #71A7E2;  /* Цвет обводки */
+} 
+
+.social-link:hover svg {
+    fill: #71A7E2;
+}
+
+.social-link-mail:hover svg {
+    fill: #fff;
+    stroke: #71A7E2;
+}
+
+.social-link:active svg {
+    fill: #3172B9;
+}
+
+.social-link:active {
+    outline: none;
+}
+
+.social-link-mail:active svg {
+    fill: #fff;
+    stroke: #3172B9;
+}
+
+.social-link-mail:active {
+    outline: none;
+}

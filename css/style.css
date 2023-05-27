@@ -221,6 +221,11 @@ list-style: none;
     opacity: 1;  /* Делаем нижнее подчеркивание непрозрачным при клике */
 }
 
+/* Скрываем бургер-меню по умолчанию (для Desktop) */
+.burger {
+    display: none;
+}
+
 /* hero */
 .hero {
     padding: 100px 0;
@@ -250,7 +255,7 @@ list-style: none;
 .hero__desc {
     margin: 0;
     margin-bottom: 34px;
-    width: 471px;
+    max-width: 471px;
     font-weight: 400;
     font-size: 16px;
     line-height: 155%;
@@ -293,7 +298,7 @@ list-style: none;
 
 .services__desc {
     text-align: center;
-    min-width: 589px;
+    max-width: 589px;
     margin-bottom: 54px;
 }
 
@@ -404,55 +409,56 @@ list-style: none;
     width: calc((100% - (var(--offsets) * var(--gap))) / (var(--offsets) + 1));
 }
 
-.articles-card__article {
+.blog-preview {
+    height: 100%;
     overflow: hidden;
     border: 1px solid #E4E4E4;
     border-radius: 5px;
 }
 
-.articles-card__link {
+.blog-preview__link {
     position: relative;
     width: 100%;
     transition: background-color .3s ease-in-out;  /* Плавно меняем цвет фона в других состояниях */
 }
 
 /* ВАЖНО: порядок - focus -> hover -> active */
-.articles-card__link:focus {  /* Меняем свойства при фокусе на карточке (по нажатию TAB) */
+.blog-preview__link:focus {  /* Меняем свойства при фокусе на карточке (по нажатию TAB) */
     background-color: #71A7E2;
 }
 
 /* В фокусе делаем весь текст белым */
-.articles-card__link:focus .articles-card__time {
+.blog-preview__link:focus .blog-preview__time {
     color: #fff;
 }
 
-.articles-card__link:focus .articles-card__title {
+.blog-preview__link:focus .blog-preview__title {
     color: #fff;
 }
 
-.articles-card__link:focus .articles-card__desc {
+.blog-preview__link:focus .blog-preview__desc {
     color: #fff;
 }
 
-.articles-card__link:hover {  /* Меняем свойства при наведении на карточку */
+.blog-preview__link:hover {  /* Меняем свойства при наведении на карточку */
     background-color: #3172B9;
 }
 
 /* При наведении делаем весь текст белым */
-.articles-card__link:hover .articles-card__time {
+.blog-preview__link:hover .blog-preview__time {
     color: #fff;
 }
 
-.articles-card__link:hover .articles-card__title {
+.blog-preview__link:hover .blog-preview__title {
     color: #fff;
 }
 
-.articles-card__link:hover .articles-card__desc {
+.blog-preview__link:hover .blog-preview__desc {
     color: #fff;
 }
 
 /* Цвет текста остается белым, т.к. одновременно работает состояние focus */
-.articles-card__link:active {  /* Меняем свойства при клике по карточке */
+.blog-preview__link:active {  /* Меняем свойства при клике по карточке */
     background-color: #0E3B6C;
 }
 
@@ -460,11 +466,11 @@ list-style: none;
     object-fit: cover;
 }
 
-.articles-card__text {
+.blog-preview__text {
     padding: 30px;
 }
 
-.articles-card__time {
+.blog-preview__time {
     display: block;
     margin-bottom: 5px;
     font-size: 10px;
@@ -473,7 +479,7 @@ list-style: none;
     transition: color .3s ease-in-out;  /* Плавно меняем цвет текста в состоянии hover */
 }
 
-.articles-card__title {
+.blog-preview__title {
     margin: 0;
     margin-bottom: 15px;
     font-weight: 600;
@@ -483,7 +489,7 @@ list-style: none;
     transition: color .3s ease-in-out;  /* Плавно меняем цвет текста в состоянии hover */
 }
 
-.articles-card__desc {
+.blog-preview__desc {
     margin: 0;
     max-width: 210px;
     font-size: 14px;
@@ -658,7 +664,7 @@ list-style: none;
 .form__top {
     justify-content: space-between;
     margin-bottom: 19px;
-    height: 138px;
+    min-height: 138px;
 }
 
 .form__left, .form__right {
@@ -666,9 +672,12 @@ list-style: none;
 }
 
 .form__left {
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 18px;
     height: 100%;
+    width: 49%;
 }
 
 .form__input {
@@ -678,7 +687,7 @@ list-style: none;
     padding: 15px 28px;
     border: 1px solid #DADADA;
     border-radius: 50px;
-    margin-bottom: 19px;
+    /* margin-bottom: 19px; */
     /* Плавная смена фона и обводки в состоянии hover и active */
     transition: background-color .3s ease-in-out, border-color .3s ease-in-out;
 }
@@ -817,48 +826,16 @@ list-style: none;
     color: #787878;
 }
 
-.footer__nav {
+.footer__list {
     margin-right: 56px;
 }
 
-.nav__item_mr_footer:not(:last-child) {
+.footer__item_mr_footer:not(:last-child) {
     margin-right: 28px;
 }
 
-.nav__link_color_gray {
+.footer__link {
     color: #787878;
-}
-
-/* ВАЖНО: порядок - focus -> hover -> active */
-.footer-link:focus {  /* Добавляем обводку при фокусе (TAB) */
-    outline-offset: 2px;
-    outline: 1px solid #71A7E2;
-}
-
-.footer-link:hover {  /* Меняем цвет ссылок при наведении */
-    color: #71A7E2;
-}
-
-.footer-link::after {  /* Нижнее подчеркивание (для active) */
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #3172B9;
-    opacity: 0;  /* Делаем прозрачным в обычном состоянии */
-    transition: opacity .3s ease-in-out;
-}
-
-.footer-link:active {  /* Св-ва при клике */
-    color: #3172B9;
-    outline: none;  /* Убираем обводку при клике */
-}
-
-.footer-link:active::after {
-    color: #3172B9;
-    opacity: 1;  /* Делаем нижнее подчеркивание непрозрачным при клике */
 }
 
 .social {

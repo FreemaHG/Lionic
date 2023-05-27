@@ -48,9 +48,14 @@ html {
 }
 
 body {
-    min-width: 1200px;
+    min-width: 320px;  /* Не меньше 320px (адаптив) */
     font-family: 'OpenSans', sans-serif;  /* По умолчанию */
     font-weight: 400;
+}
+
+/* var */
+:root {
+    --gap: 30px;  /* Отступ (адаптив) */
 }
   
 /* glob */
@@ -117,7 +122,8 @@ list-style: none;
 }
 
 .container {  /* Общие свойства для контейнера */
-    width: 1200px;  /* Ширина контейнера */
+    max-width: 1200px;  /* Ширина контейнера не более 1200px (адаптив) */
+    width: 100%;  /* Занимать 100% ширины (адаптив) */
     padding: 0 15px;  /* Боковые отступы по 15px */
     margin: 0 auto;  /* Центрирование по горизонтали */
 }
@@ -291,10 +297,33 @@ list-style: none;
     margin-bottom: 54px;
 }
 
+.services__list {  
+    --offsets: 3;  /* Сохраняем в переменную кол-во отступов в списке (для использования в формуле services__item) */
+    gap: var(--gap);  /* Отступы между карточками */
+    flex-wrap: wrap;  /* Перенос карточек при нехватке места */
+}
+
+/* Медиа-запросы добавлены в качестве ДЕМОНСТРАЦИИ */
+/* При ширине экрана до 1024px меняем св-во --offsets у класса services__list (меняем кол-во отступов (2 отступа (т.е. 3 карточки) в ряду) */
+/* @media (max-width: 1024px) {
+    .services__list {
+        --offsets: 2;
+    }
+} */
+
+/* При ширине экрана до 768px меняем св-во --offsets у класса services__list (меняем кол-во отступов (1 отступ (т.е. 2 карточки) в ряду) */
+/* @media (max-width: 768px) {
+    .services__list {
+        --offsets: 1;
+    }
+} */
+
 .services__item {
     flex-direction: column;
     align-items: center;
-    max-width: 270px;
+    /* max-width: 270px;  /* Изначально */
+    /* Ширина карочки = (100% от ширины экрана - (n отступов по n px)) / на кол-во блоков (блоков всегда 1 больше, чем отступов!) (адаптив) */
+    width: calc((100% - (var(--gap) * var(--offsets))) / (var(--offsets) + 1));  
     min-height: 320px;
     padding: 60px 30px;
     border: 1px solid #E4E4E4;
@@ -309,9 +338,9 @@ list-style: none;
     cursor: pointer;  /* Меняем курсор при наведении */
 }
 
-.services__item:not(:nth-child(4n)) {
+/* .services__item:not(:nth-child(4n)) {
     margin-right: 30px;
-}
+} */
 
 .services-card__icon {
     fill: #3172B9;
@@ -364,14 +393,15 @@ list-style: none;
 
 .articles__list {
     flex-wrap: wrap;
+    --offsets: 1;  /* Кол-во отступов по умолчанию (2 карточки в ряду) */
+    gap: var(--gap);  /* Отступ между карточками */
 }
 
 .articles-card {
-    width: 570px;
-}
-
-.articles__item {
-    margin-bottom: 30px;
+    /* width: 570px;  Было */
+    /* Ширина карточки расчитывается: ((100% от ширины экрана - (кол-во отступов между карточками * размеры отступа)) / кол-во карточек 
+    (карточек всегда на 1 больше, чем отступов)) */
+    width: calc((100% - (var(--offsets) * var(--gap))) / (var(--offsets) + 1));
 }
 
 .articles-card__article {
@@ -426,10 +456,6 @@ list-style: none;
     background-color: #0E3B6C;
 }
 
-.articles__item:not(:nth-child(2n)) {
-    margin-right: 30px;
-}
-
 .block-preview-image {
     object-fit: cover;
 }
@@ -472,12 +498,17 @@ list-style: none;
 }
 
 .clients__list {
-    gap: 30px;
+    flex-wrap: wrap;  /* Перенос карточек при нехватке места */
+    gap: var(--gap);  /* Отступы между карточками */
+    --offsets: 2;  /* Кол-во отступов между карточками (2 отступа, 3 карточки в ряду) */
 }
 
 .clients-card {
     flex-direction: column;
-    width: 370px;
+    /* width: 370px;  Было */
+    /* Ширина карточки расчитывается: ((100% от ширины экрана - (кол-во отступов между карточками * размеры отступа)) / кол-во карточек 
+    (карточек всегда на 1 больше, чем отступов)) */
+    width: calc((100% - (var(--offsets) * var(--gap))) / (var(--offsets) + 1));
     padding: 50px 36px;
     padding-bottom: 30px;
     border: 1px solid #6B6B6B;
@@ -536,29 +567,34 @@ list-style: none;
     font-style: normal;  /* Сбрасываем наклонный фрифт для текста тега address */
 }
 
+.contacts__list {
+    flex-wrap: wrap;  /* Перенос карточек при нехватке места */
+    gap: var(--gap);  /* Отступы между карточками */
+    --offsets: 2;  /* Кол-во отступов между карточками (2 отступа, 3 карточки в ряду) */
+}
+
 .contacts-item {
     flex-direction: column;
-    width: 370px;
+    /* width: 370px;  Было */
+    /* Ширина карточки расчитывается: ((100% от ширины экрана - (кол-во отступов между карточками * размеры отступа)) / кол-во карточек 
+    (карточек всегда на 1 больше, чем отступов)) */
+    width: calc((100% - (var(--offsets) * var(--gap))) / (var(--offsets) + 1));
     background-position: left top;  /* Выравнивание фоновой иконки слева сверху */
     background-repeat: no-repeat;  /* Не повторять картинку */
     background-size: 29px 29px;  /* Размеры изображения */
     padding-top: 48px;  /* Верхний отступ, чтобы иконка не налазила сверху */
 }
 
-.contacts-item__address {
+.contacts-item_address-icon {
     background-image: url('../img/location_on.svg');
 }
 
-.contacts-item__call {
+.contacts-item_call-icon {
     background-image: url('../img/phone.svg');
 }
 
-.contacts-item__mail {
+.contacts-item_mail-icon {
     background-image: url('../img/mail.svg');
-}
-
-.contacts-item_mr:not(:nth-child(3n)) {
-    margin-right: 30px;
 }
 
 .contacts-item__caption {
